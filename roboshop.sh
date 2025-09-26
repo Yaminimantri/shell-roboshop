@@ -23,7 +23,7 @@ do
     {
         "Comment": "updating record set"
         ,"Changes": [{
-        "Action"              : "upsert"
+        "Action"              : "UPSERT"
         ,"ResourceRecordSet"  : {
             "Name"              : "'$Record_Name'"
             ,"Type"             : "A"
