@@ -40,14 +40,14 @@ do
 done
 
 cp mongodb.repo vim /etc/yum.repos.d/mongo.repo
-VALIDATE $? "Adding Mongo repo"
+validate $? "Adding Mongo repo"
 
 dnf install mongodb-org -y &>>$log_file
-VALIDATE $? "Installing MongoDB"
+validate $? "Installing MongoDB"
 
 systemctl enable mongod &>>$LOG_FILE
-VALIDATE $? "Enable MongoDB"
+validate $? "Enable MongoDB"
 
 systemctl start mongod 
-VALIDATE $? "Start MongoDB"
+validate $? "Start MongoDB"
 
