@@ -1,4 +1,4 @@
-
+#!/bin/bash
 
 ami_id="ami-09c813fb71547fc4f"
 sg_id="sg-0e9e29a7d8854c36b"
