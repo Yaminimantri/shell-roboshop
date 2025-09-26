@@ -12,7 +12,7 @@ script_name=$( echo $0 | cut -d "." -f1 )
 log_file="$log_floder/$script_name.log"
 
 mkdir -p $logs_floder
-echo "script started executed at: $(date)" | tee -a $log_file
+echo "script started executed at: $(date)" 
 
 if [ $userid -ne 0 ]; then
     echo "ERROR: please run this script with root privelege"
@@ -27,17 +27,6 @@ validate(){
         echo -e "$2...$G succuss $N" 
     fi
 }
-
-for package in $@
-do
-    dnf list installed $package &>>$log_file
-    if [ $? -ne 0 ]; then
-        dnf install $package -y &>>$log_file
-        validate $? "$package"
-    else
-        echo -e "$package already exist..$Y skipping $N"
-    fi
-done
 
 cp mongodb.repo vim /etc/yum.repos.d/mongo.repo
 validate $? "Adding Mongo repo"
