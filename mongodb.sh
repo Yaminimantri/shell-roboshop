@@ -12,7 +12,7 @@ script_name=$( echo $0 | cut -d "." -f1 )
 log_file="$log_floder/$script_name.log"
 
 mkdir -p $logs_floder
-echo "script started executed at: $(date)" 
+echo "script started executed at: $(date)" | tee -a $log_file 
 
 if [ $userid -ne 0 ]; then
     echo "ERROR: please run this script with root privelege"
@@ -31,10 +31,10 @@ validate(){
 cp mongo.repo /etc/yum.repos.d/mongo.repo
 validate $? "Adding Mongo repo"
 
-dnf install mongodb-org -y &>>$log_file
+dnf install mongodb-org -y &>>$log_file | tee -a $log_file
 validate $? "Installing MongoDB"
 
-systemctl enable mongod &>>$log_file
+systemctl enable mongod &>>$log_file | tee -a $log_file
 validate $? "Enable MongoDB"
 
 systemctl start mongod 
