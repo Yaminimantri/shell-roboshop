@@ -21,20 +21,20 @@ fi
 
 validate(){
     if [ $1 -ne 0 ]; then
-        echo -e "$2...$R failure $N" 
+        echo -e "$2...$R failure $N" | tee -a $log_file
         exit 1
     else
-        echo -e "$2...$G succuss $N" 
+        echo -e "$2...$G succuss $N" | tee -a $log_file 
     fi
 }
 
 cp mongo.repo /etc/yum.repos.d/mongo.repo
 validate $? "Adding Mongo repo"
 
-dnf install mongodb-org -y &>>$log_file | tee -a $log_file
+dnf install mongodb-org -y &>>$log_file 
 validate $? "Installing MongoDB"
 
-systemctl enable mongod &>>$log_file | tee -a $log_file
+systemctl enable mongod &>>$log_file 
 validate $? "Enable MongoDB"
 
 systemctl start mongod 
