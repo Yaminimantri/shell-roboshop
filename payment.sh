@@ -46,8 +46,8 @@ fi
 mkdir -p /app
 validate $? "Creating app directory"
 
-curl -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip &>>$log_file
-validate $? "Downloading shipping application"
+curl -o /tmp/payment.zip https://roboshop-artifacts.s3.amazonaws.com/payment-v3.zip &>>$log_file
+validate $? "Downloading payment application"
 
 cd /app 
 validate $? "Changing to app directory"
@@ -55,13 +55,13 @@ validate $? "Changing to app directory"
 rm -rf /app/*
 validate $? "Removing existing code"
 
-unzip /tmp/shipping.zip &>>$log_file
-validate $? "unzip shipping"
+unzip /tmp/payment.zip &>>$log_file
+validate $? "unzip payment"
 
 pip3 install -r requirements.txt &>>$log_file
 
-cp $SCRIPT_DIR/shipping.service /etc/systemd/system/shipping.service
+cp $SCRIPT_DIR/payment.service /etc/systemd/system/payment.service
 systemctl daemon-reload
-systemctl enable shipping  &>>$log_file
+systemctl enable payment  &>>$log_file
 
-systemctl restart shipping
+systemctl restart payment
